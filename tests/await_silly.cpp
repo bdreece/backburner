@@ -4,8 +4,8 @@
 #include <unistd.h>
 
 extern "C" {
-#define BACKBURNER_PRIMITIVES
-#include "backburner.h"
+#include "backburner/macro.h"
+BACKBURNER_DERIVE(int, int);
 }
 
 static int expensive(void *arg) {
@@ -16,9 +16,9 @@ static int expensive(void *arg) {
 
 BOOST_AUTO_TEST_CASE(await_silly) {
   int seconds = 5;
-  BOOST_TEST(seconds == await_int(future_int(expensive, (void *)&seconds)));
-  BOOST_TEST(seconds == await_int(future_int(expensive, (void *)&seconds)));
-  BOOST_TEST(seconds == await_int(future_int(expensive, (void *)&seconds)));
-  BOOST_TEST(seconds == await_int(future_int(expensive, (void *)&seconds)));
-  BOOST_TEST(seconds == await_int(future_int(expensive, (void *)&seconds)));
+  BOOST_TEST(seconds == await_int(async_int(expensive, (void *)&seconds)));
+  BOOST_TEST(seconds == await_int(async_int(expensive, (void *)&seconds)));
+  BOOST_TEST(seconds == await_int(async_int(expensive, (void *)&seconds)));
+  BOOST_TEST(seconds == await_int(async_int(expensive, (void *)&seconds)));
+  BOOST_TEST(seconds == await_int(async_int(expensive, (void *)&seconds)));
 }

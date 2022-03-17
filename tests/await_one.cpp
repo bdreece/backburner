@@ -1,3 +1,4 @@
+#include <sys/cdefs.h>
 #define BOOST_TEST_MODULE backburner_await_one
 #include <boost/test/unit_test.hpp>
 
@@ -8,13 +9,13 @@ extern "C" {
 BACKBURNER_DERIVE(int, int)
 }
 
-static int expensive(void *arg) {
-  int *seconds = (int *)arg;
-  sleep(*seconds);
-  return *seconds;
+__attribute_noinline__ int expensive(void *arg) {
+  int seconds = *(int *)arg;
+  sleep(seconds);
+  return seconds;
 }
 
 BOOST_AUTO_TEST_CASE(await_one) {
   int seconds = 5;
-  BOOST_TEST(seconds == await_int(future_int(expensive, (void *)&seconds)));
+  BOOST_TEST(seconds == await_int(async_int(expensive, (void *)&seconds)));
 }
