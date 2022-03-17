@@ -4,8 +4,8 @@
 #include <unistd.h>
 
 extern "C" {
-#define BACKBURNER_PRIMITIVES
-#include "backburner.h"
+#include "backburner/macro.h"
+BACKBURNER_DERIVE(int, int)
 }
 
 static int expensive(void *arg) {

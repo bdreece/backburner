@@ -1,0 +1,14 @@
+#ifdef BACKBURNER_STDINT
+#include <stddef.h>
+#include <stdint.h>
+BACKBURNER_DECLARE(uint8_t, u8)
+BACKBURNER_DECLARE(uint16_t, u16)
+BACKBURNER_DECLARE(uint32_t, u32)
+BACKBURNER_DECLARE(uint64_t, u64)
+BACKBURNER_DECLARE(int8_t, i8)
+BACKBURNER_DECLARE(int16_t, i16)
+BACKBURNER_DECLARE(int32_t, i32)
+BACKBURNER_DECLARE(size_t, usize)
+BACKBURNER_DECLARE(uintptr_t, uintptr)
+BACKBURNER_DECLARE(ptrdiff_t, ptrdiff)
+#endif // BACKBURNER_INTS
